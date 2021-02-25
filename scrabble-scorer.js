@@ -13,60 +13,116 @@ const oldPointStructure = {
 };
 
 function oldScrabbleScorer(word) {
-	word = word.toUpperCase();
-	let letterPoints = "";
- 
-	for (let i = 0; i < word.length; i++) {
- 
-	  for (const pointValue in oldPointStructure) {
- 
-		 if (oldPointStructure[pointValue].includes(word[i])) {
-			letterPoints += `Points for '${word[i]}': ${pointValue}\n`
-		 }
- 
-	  }
-	}
-	return letterPoints;
- }
+  word = word.toUpperCase();
+  let letterPoints = "";
 
+  for (let i = 0; i < word.length; i++) {
+
+    for (const pointValue in oldPointStructure) {
+
+      if (oldPointStructure[pointValue].includes(word[i])) {
+        letterPoints += `Points for '${word[i]}': ${pointValue}\n`
+      }
+    }
+  }
+  console.log(letterPoints);
+  return letterPoints;
+}
+function scrabbleScorer(word) {
+  word = word.toLowerCase();
+  let score = 0
+
+
+  for (let i = 0; i < word.length; i++) {
+
+    score = score + Number(newPointStructure[word[i]])
+  }
+  console.log("Score for " + word + " is " + score);
+  return 0;
+}
+
+function simpleScorer(word) {
+  word = word.toUpperCase();
+
+  console.log("Score for " + word + " is " + word.length);
+  return 0;
+}
+
+function vowelBonusScorer(word) {
+  word = word.toUpperCase();
+  let vowels = ["A", "E", "I", "O", "U"]
+  let score = word.length
+
+  for (let i = 0; i < word.length; i++) {
+    if (vowels.includes(word[i])) {
+      score += 2
+    }
+  }
+  console.log("Score for " + word + " is " + score);
+  return score;
+}
 // your job is to finish writing these functions and variables that we've named //
 // don't change the names or your program won't work as expected. //
 
 function initialPrompt() {
-   console.log("Let's play some scrabble! Enter a word:");
+  scrabStart = input.question("Let's play some Scrabble!\n \nEnter a word to score: ");
 };
 
-let simpleScore;
+let scrabStart = "";
 
-let vowelBonusScore;
+let simpleScore = { name: "Simple Score", description: "Each letter is worth 1 point.", scorerFunction: simpleScorer }
 
-let scrabbleScore;
+let vowelBonusScore = { name: "Bonus Vowels", description: "Vowels are 3 pts, consonants are 1 pt.", scorerFunction: vowelBonusScorer }
 
-const scoringAlgorithms = [];
+let scrabbleScore = { name: "Scrabble", description: "The traditional scoring algorithm.", scorerFunction: scrabbleScorer }
 
-function scorerPrompt() {}
+const scoringAlgorithms = [simpleScore, vowelBonusScore, scrabbleScore];
 
-function transform() {};
+function scorerPrompt() {
+  chooseScore = input.question("Which scoring algorithm would you like to use?\n\n0 - Simple: One point per character\n1 - Vowel Bonus: Vowels are worth 3 points\n2 - Scrabble: Uses Scrabble point system\nEnter 0, 1, or 2:")
+  if (chooseScore === "0") {
+    return scoringAlgorithms[0]
+  }
+  if (chooseScore === "1") {
+    return scoringAlgorithms[1]
+  }
+  else {
+    return scoringAlgorithms[2]
+  }
+}
 
-let newPointStructure;
+function transform(object) {
+  let newObject = {}
+  for (key in object) {
+    for (let i = 0; i < object[key].length; i++) {
+      let newKey = object[key][i]
+      newKey = newKey.toLowerCase()
+      newObject[newKey] = Number(key)
+    }
+  }
+  return newObject
+};
+
+let newPointStructure = transform(oldPointStructure);
 
 function runProgram() {
-   initialPrompt();
-   
+  initialPrompt();
+  let prompt = scorerPrompt();
+  prompt.scorerFunction(scrabStart)
 }
 
 // Don't write any code below this line //
 // And don't change these or your program will not run as expected //
 module.exports = {
-   initialPrompt: initialPrompt,
-   transform: transform,
-   oldPointStructure: oldPointStructure,
-   simpleScore: simpleScore,
-   vowelBonusScore: vowelBonusScore,
-   scrabbleScore: scrabbleScore,
-   scoringAlgorithms: scoringAlgorithms,
-   newPointStructure: newPointStructure,
-	runProgram: runProgram,
-	scorerPrompt: scorerPrompt
+  initialPrompt: initialPrompt,
+  transform: transform,
+  oldPointStructure: oldPointStructure,
+  simpleScore: simpleScore,
+  vowelBonusScore: vowelBonusScore,
+  scrabbleScore: scrabbleScore,
+  scoringAlgorithms: scoringAlgorithms,
+  newPointStructure: newPointStructure,
+  runProgram: runProgram,
+  scorerPrompt: scorerPrompt
 };
 
