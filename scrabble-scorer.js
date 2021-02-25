@@ -38,14 +38,14 @@ function scrabbleScore(word) {
     score = score + Number(newPointStructure[word[i]])
   }
   console.log("Score for " + word + " is " + score);
-  return 0;
+  return score;
 }
 
 function simpleScore(word) {
   word = word.toUpperCase();
 
   console.log("Score for " + word + " is " + word.length);
-  return 0;
+  return word.length;
 }
 
 function vowelBonusScore(word) {
