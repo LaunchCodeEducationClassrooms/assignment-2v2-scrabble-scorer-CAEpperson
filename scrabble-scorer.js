@@ -70,11 +70,11 @@ function initialPrompt() {
 
 let scrabStart = "";
 
-let simpleScorer = { name: "Simple Score", description: "Each letter is worth 1 point.", scorerFunction: simpleScore }
+let simpleScorer = { name: "Simple Score", description: "Each letter is worth 1 point.", scoringFunction: simpleScore }
 
-let vowelBonusScorer = { name: "Bonus Vowels", description: "Vowels are 3 pts, consonants are 1 pt.", scorerFunction: vowelBonusScore }
+let vowelBonusScorer = { name: "Bonus Vowels", description: "Vowels are 3 pts, consonants are 1 pt.", scoringFunction: vowelBonusScore }
 
-let scrabbleScorer = { name: "Scrabble", description: "The traditional scoring algorithm.", scorerFunction: scrabbleScore }
+let scrabbleScorer = { name: "Scrabble", description: "The traditional scoring algorithm.", scoringFunction: scrabbleScore }
 
 const scoringAlgorithms = [simpleScorer, vowelBonusScorer, scrabbleScorer];
 
@@ -108,7 +108,7 @@ let newPointStructure = transform(oldPointStructure);
 function runProgram() {
   initialPrompt();
   let prompt = scorerPrompt();
-  prompt.scorerFunction(scrabStart)
+  prompt.scoringFunction(scrabStart)
 }
 
 // Don't write any code below this line //
