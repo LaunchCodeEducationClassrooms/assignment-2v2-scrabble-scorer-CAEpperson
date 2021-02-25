@@ -28,7 +28,7 @@ function oldScrabbleScorer(word) {
   console.log(letterPoints);
   return letterPoints;
 }
-function scrabbleScorer(word) {
+function scrabbleScore(word) {
   word = word.toLowerCase();
   let score = 0
 
@@ -41,14 +41,14 @@ function scrabbleScorer(word) {
   return 0;
 }
 
-function simpleScorer(word) {
+function simpleScore(word) {
   word = word.toUpperCase();
 
   console.log("Score for " + word + " is " + word.length);
   return 0;
 }
 
-function vowelBonusScorer(word) {
+function vowelBonusScore(word) {
   word = word.toUpperCase();
   let vowels = ["A", "E", "I", "O", "U"]
   let score = word.length
@@ -70,13 +70,13 @@ function initialPrompt() {
 
 let scrabStart = "";
 
-let simpleScore = { name: "Simple Score", description: "Each letter is worth 1 point.", scorerFunction: simpleScorer }
+let simpleScorer = { name: "Simple Score", description: "Each letter is worth 1 point.", scorerFunction: simpleScore }
 
-let vowelBonusScore = { name: "Bonus Vowels", description: "Vowels are 3 pts, consonants are 1 pt.", scorerFunction: vowelBonusScorer }
+let vowelBonusScorer = { name: "Bonus Vowels", description: "Vowels are 3 pts, consonants are 1 pt.", scorerFunction: vowelBonusScore }
 
-let scrabbleScore = { name: "Scrabble", description: "The traditional scoring algorithm.", scorerFunction: scrabbleScorer }
+let scrabbleScorer = { name: "Scrabble", description: "The traditional scoring algorithm.", scorerFunction: scrabbleScore }
 
-const scoringAlgorithms = [simpleScore, vowelBonusScore, scrabbleScore];
+const scoringAlgorithms = [simpleScorer, vowelBonusScorer, scrabbleScorer];
 
 function scorerPrompt() {
   chooseScore = input.question("Which scoring algorithm would you like to use?\n\n0 - Simple: One point per character\n1 - Vowel Bonus: Vowels are worth 3 points\n2 - Scrabble: Uses Scrabble point system\nEnter 0, 1, or 2:")
