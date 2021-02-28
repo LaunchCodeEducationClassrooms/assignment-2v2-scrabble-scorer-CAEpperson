@@ -37,14 +37,12 @@ function scrabbleScore(word) {
 
     score = score + Number(newPointStructure[word[i]])
   }
-  console.log("Score for " + word + " is " + score);
   return score;
 }
 
 function simpleScore(word) {
   word = word.toUpperCase();
 
-  console.log("Score for " + word + " is " + word.length);
   return word.length;
 }
 
@@ -58,7 +56,6 @@ function vowelBonusScore(word) {
       score += 2
     }
   }
-  console.log("Score for " + word + " is " + score);
   return score;
 }
 // your job is to finish writing these functions and variables that we've named //
@@ -108,7 +105,7 @@ let newPointStructure = transform(oldPointStructure);
 function runProgram() {
   initialPrompt();
   let prompt = scorerPrompt();
-  prompt.scoringFunction(scrabStart)
+  console.log("Score for " + scrabStart + " is " + prompt.scoringFunction(scrabStart))
 }
 
 // Don't write any code below this line //
